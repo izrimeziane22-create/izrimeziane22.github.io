@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Portfolio</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            color: #00FF00;
+            background-color: #000000;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 0, 0.03) 0px,
+                    rgba(0, 255, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            overflow-x: hidden;
+            text-shadow: 0 0 10px #00FF00;
+        }
+        /* Background canvas for particles */
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+        }
+        /* Header */
+        header {
+            background-color: #000000;
+            color: #00FF00;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #00FF00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            color: #00FF00;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px #00FF00;
+        }
+        nav ul li a:hover {
+            color: #00FFFF;
+            text-shadow: 0 0 20px #00FFFF;
+            transform: scale(1.1);
+        }
+        /* Dropdown menu */
+        nav .dropdown {
+            position: relative;
+        }
+        nav .dropdown > a {
+            cursor: pointer;
+        }
+        nav .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000000;
+            border: 2px solid #00FF00;
+            border-top: none;
+            min-width: 180px;
+            list-style: none;
+            display: none;
+            z-index: 101;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            margin-top: -2px;
+            padding: 0.5rem 0;
+        }
+        nav .dropdown:hover .dropdown-menu {
+            display: flex;
+            flex-direction: column;
+        }
+        nav .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        nav .dropdown-menu li a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #00FF00;
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        nav .dropdown-menu li a:hover {
+            background-color: #00FF00;
+            color: #000000;
+            text-shadow: none;
+            transform: none;
+        }
+        /* Main sections */
+        main {
+            margin-top: 80px;
+            display: block;
+            width: 100%;
+        }
+        section {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 0, 0.03) 0px,
+                    rgba(0, 255, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        #home {
+            background: rgba(0, 0, 0, 0.7);
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 0, 0.03) 0px,
+                    rgba(0, 255, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            animation: matrixGlow 3s ease-in-out infinite;
+            color: #00FF00;
+        }
+        @keyframes matrixGlow {
+            0%, 100% { text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; }
+            50% { text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00, 0 0 60px #00FFFF; }
+        }
+        #profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #4169E1;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #4169E1; }
+            100% { box-shadow: 0 0 20px #4169E1; }
+        }
+        @keyframes matrixBlink {
+            0%, 100% { box-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; }
+            50% { box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF; }
+        }
+        @keyframes galaxyMove {
+            0%, 100% { background-position: 0% 50%, auto, auto, auto; }
+            50% { background-position: 100% 50%, auto, auto, auto; }
+        }
+        #competences {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+        }
+        #tcs {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-left: 5px solid #00FF00;
+            color: #00FF00;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+            border-top: 2px solid #00FF00;
+        }
+        #stages {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+        }
+        #veille {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        #projects {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+        }
+        #contact {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+            min-height: auto !important;
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 2rem;
+            clear: both;
+        }
+        #tcs {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FF00;
+            border-top: 2px solid #00FF00;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem;
+        }
+        #tcs h2 {
+            margin-bottom: 2rem;
+        }
+        .procedure-block {
+            background: #000000;
+            padding: 1.5rem;
+            border-radius: 0px;
+            border: 2px solid #00FF00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+            color: #00FF00;
+            max-width: 500px;
+            text-align: center;
+        }
+        .procedure-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+            border-color: #00FFFF;
+        }
+        .procedure-block h3 {
+            color: #00FFFF;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00FFFF;
+        }
+        .procedure-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #000000;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 10px #00FF00;
+            font-weight: bold;
+        }
+        .procedure-link:hover {
+            background-color: #00FF00;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        }
+        h1, h2 {
+            margin-bottom: 1rem;
+            color: #00FF00;
+            text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00;
+            font-weight: bold;
+        }
+        p {
+            max-width: 600px;
+            margin-bottom: 1rem;
+        }
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .project {
+            background: #000000;
+            padding: 1rem;
+            border-radius: 0px;
+            border: 2px solid #00FF00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+            color: #00FF00;
+        }
+        #tcs .project {
+            max-width: 400px;
+            padding: 0.5rem;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+            border-color: #00FFFF;
+        }
+        .veille {
+            background: #000000;
+            padding: 1rem;
+            border-radius: 0px;
+            border: 2px solid #00FF00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+            color: #00FF00;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .veille:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+            border-color: #00FFFF;
+        }
+        .veille h3 {
+            color: #00FFFF;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00FFFF;
+        }
+        .veille p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .veille strong {
+            color: #ffffff;
+        }
+        /* Contact form */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+        }
+        input, textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 2px solid #00FF00;
+            border-radius: 0px;
+            background-color: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px #00FF00;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #00AA00;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #00FFFF;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #000000;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            border-radius: 0px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px #00FF00;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #00FF00;
+            color: #000000;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            border-color: #00FFFF;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            section {
+                padding: 1rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">ACCUEIL</a></li>
+                <li><a href="#about">A PROPOS</a></li>
+                <li><a href="#competences">Badges</a></li>
+                <li><a href="#tcs">TCS</a></li>
+                <li><a href="#stages">STAGES</a></li>
+                <li><a href="#veille">VEILLE</a></li>
+                <li class="dropdown">
+                    <a href="#projects">PROJETS</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#projects-scolaire">projet scolaire E6</a></li>
+                        <li><a href="#procedure">toutes les procedures</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <div style="max-width: 1000px; width: 100%; text-align: center;">
+                <h1 style="font-size: 3.5em; text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00; margin-bottom: 0.5rem; animation: matrixGlow 2s infinite;">IZRI MEZIANE</h1>
+                <h2 style="font-size: 2em; color: #00FFFF; text-shadow: 0 0 15px #00FFFF; margin-bottom: 1rem;">Étudiant en BTS SIO SISR</h2>
+                <p style="font-size: 1.3em; color: #00FF00; margin: auto auto 0.5rem auto; max-width: 700px; text-align: center;">Spécialiste Systèmes et Réseaux Informatiques</p>
+                
+                <p style="font-size: 1.1em; margin: 2rem auto; max-width: 700px; line-height: 1.8; text-align: center;">
+                    Passionné par l'infrastructure IT et les nouvelles technologies, je développe des compétences en administration système, sécurité réseau et virtualisation.
+                </p>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+                    <a href="#projects" style="padding: 0.8rem 2rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FF00;" onmouseover="this.style.background='#00FF00'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 0, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FF00'; this.style.boxShadow='none'">Voir mes projets</a>
+                    <a href="#contact" style="padding: 0.8rem 2rem; background-color: #000000; color: #00FFFF; border: 2px solid #00FFFF; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FFFF;" onmouseover="this.style.background='#00FFFF'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FFFF'; this.style.boxShadow='none'">Me contacter</a>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; border: 2px solid #00FF00; background: rgba(0, 255, 0, 0.05);">
+                    <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-bottom: 1.5rem;">» Stack Technologique</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left;">
+                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
+                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Réseaux</h4>
+                            <p style="font-size: 0.95em;">Cisco CCNA <span style="color: #00FFFF;">(en cours)</span> • VLANs • Routage</p>
+                        </div>
+                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
+                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Sécurité</h4>
+                            <p style="font-size: 0.95em;">pfSense <span style="color: #00FFFF;">(en cours)</span> • Firewall • VPN</p>
+                        </div>
+                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
+                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Systèmes</h4>
+                            <p style="font-size: 0.95em;">Active Directory <span style="color: #00FFFF;">(en cours)</span> • Linux/Windows <span style="color: #00FFFF;">(en cours)</span></p>
+                        </div>
+                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
+                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Virtualisation</h4>
+                            <p style="font-size: 0.95em;">Proxmox <span style="color: #00FFFF;">(en cours)</span> • Hyper-V</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <h2>A PROPOS</h2>
+            <div style="max-width: 900px; text-align: left; color: #00FF00;">
+                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-top: 2rem; margin-bottom: 1rem;">» MA PRÉSENTATION</h3>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    Initialement attiré par le domaine de la finance et de la gestion, j'ai débuté mon parcours en licence Économie-Gestion. Cette formation m'a permis d'acquérir une solide base analytique et un esprit rigoureux. Cependant, ma curiosité constante pour l'univers de l'informatique et des technologies m'a progressivement amené à réfléchir à une réorientation vers un domaine plus technique.
+                </p>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    Depuis toujours intéressé par le fonctionnement des systèmes, des réseaux et des infrastructures numériques, j'ai choisi de m'orienter vers le BTS SIO option SISR afin de me spécialiser dans un secteur qui me passionne réellement. Cette décision a été mûrement réfléchie et correspond pleinement à mes ambitions professionnelles.
+                </p>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    Curieux, méthodique et doté d'un esprit d'analyse développé grâce à mon parcours en économie, j'apprécie résoudre des problématiques techniques et comprendre en profondeur le fonctionnement des environnements informatiques. Mon sens de l'adaptation et mon aisance relationnelle me permettent de travailler efficacement en équipe et de m'investir pleinement dans les projets qui me sont confiés.
+                </p>
+                <p style="margin-bottom: 2rem; line-height: 1.8;">
+                    Actuellement en BTS SIO option SISR, je développe mes compétences en administration système, gestion des réseaux, sécurité informatique et virtualisation. Je suis à la recherche d'une alternance afin de mettre en pratique mes connaissances et continuer à progresser dans un environnement professionnel stimulant.
+                </p>
+
+                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-top: 2rem; margin-bottom: 1rem;">» MON PARCOURS SCOLAIRE</h3>
+                
+                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00; margin-bottom: 1rem;">
+                        <h4 style="color: #00FFFF;">BTS SIO Option SISR – 1ère année</h4>
+                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> En cours</p>
+                        <p style="margin: 0.5rem 0;"><strong>École :</strong> IFC Marseille</p>
+                        <p style="margin: 0.5rem 0;"><strong>Spécialité :</strong> Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2026 - Juin 2027</p>
+                    </div>
+                </div>
+
+                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00; margin-bottom: 1rem;">
+                        <h4 style="color: #00FFFF;">Licence 1 & 2 : Économie – Gestion</h4>
+                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> Invalide</p>
+                        <p style="margin: 0.5rem 0;"><strong>Université :</strong> Aix-Marseille Université</p>
+                        <p style="margin: 0.5rem 0;"><strong>Description :</strong> Formation en économie, gestion, mathématiques appliquées, statistiques et analyse financière</p>
+                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2023 - Juin 2025</p>
+                    </div>
+                </div>
+
+                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem;">
+                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00;">
+                        <h4 style="color: #00FFFF;">Baccalauréat Général – Spécialités Mathématiques & Sciences Économiques et Sociales</h4>
+                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> Obtenu</p>
+                        <p style="margin: 0.5rem 0;"><strong>Établissement :</strong> Lycée Saint-Charles</p>
+                        <p style="margin: 0.5rem 0;"><strong>Description :</strong> Formation générale avec spécialisation en mathématiques</p>
+                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2021 - Juin 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="competences">
+            <h2>Badges</h2>
+            <a href="https://www.credly.com/users/meziane-izri/badges#credly" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; border-radius: 0px; cursor: pointer; transition: all 0.3s; text-decoration: none; text-shadow: 0 0 10px #00FF00;">VOIR MES BADGES CREDLY</a>
+        </section>
+        <section id="tcs">
+            <h2>TCS (SISR)</h2>
+            <div style="background-color: rgba(0, 0, 0, 0.7); border: 2px solid #00FF00; padding: 2rem; max-width: 900px; min-height: 300px; box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;">
+                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF;">📊 Fichier TCS</h3>
+                <a href="TCS.xlsx" download style="padding: 0.8rem 2rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FF00; border-radius: 4px;" onmouseover="this.style.background='#00FF00'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 0, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FF00'; this.style.boxShadow='none'">TÉLÉCHARGER TCS.xlsx</a>
+            </div>
+        </section>
+        <section id="projects-scolaire">
+            <h2>Projet scolaire E6</h2>
+            <div class="project">
+                <h3>Projet 1 : Segmentation du réseau et configuration VLAN</h3>
+                <p><strong>Objectif :</strong> Séparer le réseau en plusieurs sous-réseaux pour améliorer la sécurité et la gestion du trafic.</p>
+                <p><strong>Actions réalisées :</strong></p>
+                <ul>
+                    <li>Analyse du réseau existant et planification des VLANs (VLAN 10 : administration, VLAN 20 : utilisateurs, VLAN 30 : invités)</li>
+                    <li>Configuration des VLANs sur switchs Zyxel GS1900 et Netgear GS108E</li>
+                    <li>Attribution des ports aux VLANs correspondants</li>
+                    <li>Test de communication entre VLANs et vérification de l'isolation</li>
+                </ul>
+                <p><strong>Outils et technologies utilisés :</strong> Zyxel GS1900, Netgear GS108E, plan d'adressage IP</p>
+                <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
+                <ul>
+                    <li>Gérer le patrimoine informatique (SISR)</li>
+                    <li>Administrer un réseau local</li>
+                    <li>Mettre en œuvre des solutions de sécurité réseau</li>
+                </ul>
+            </div>
+            <div class="project">
+                <h3>Projet 2 : Virtualisation avec Proxmox et pfSense</h3>
+                <p><strong>Objectif :</strong> Créer un environnement virtualisé sécurisé pour tester plusieurs machines et gérer le trafic réseau avec un firewall.</p>
+                <p><strong>Actions réalisées :</strong></p>
+                <ul>
+                    <li>Installation et configuration de Proxmox VE</li>
+                    <li>Création de plusieurs machines virtuelles (VM)</li>
+                    <li>Installation et configuration de pfSense pour filtrer le trafic entre VM et réseau externe</li>
+                    <li>Création de règles de firewall et tests de connectivité</li>
+                </ul>
+                <p><strong>Outils et technologies utilisés :</strong> Proxmox VE, pfSense, VLAN, plan d'adressage IP</p>
+                <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
+                <ul>
+                    <li>Installer et configurer des systèmes et services réseaux (SISR)</li>
+                    <li>Sécuriser un réseau et gérer les flux</li>
+                    <li>Administrer un environnement virtualisé</li>
+                </ul>
+            </div>
+        </section>
+        <section id="stages">
+            <h2>MES STAGES</h2>
+            <p style="text-align: center; color: #00AA00; font-style: italic; margin: 2rem 0;">À venir...</p>
+        </section>
+        <section id="veille">
+            <h2>VEILLE</h2>
+            <div class="veille">
+                <h3>Veille juridique – RGPD</h3>
+                <p><strong>Date :</strong> Janvier 2026</p>
+                <p><strong>Sources :</strong> CNIL, documentation officielle RGPD</p>
+                <p>Les données personnelles doivent être sécurisées et les violations signalées dans les délais légaux.</p>
+            </div>
+            <div class="veille">
+                <h3>Veille technologique – Solutions Cloud</h3>
+                <p><strong>Date :</strong> Janvier 2026</p>
+                <p><strong>Sources :</strong> Microsoft Azure, AWS</p>
+                <p>Solutions cloud pour stocker des données de manière sécurisée avec chiffrement et gestion des accès.</p>
+            </div>
+        </section>
+        <section id="procedure">
+            <h2>TOUTES LES PROCEDURES</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+                <div class="procedure-block">
+                    <h3>Procédure pfSense + Rules</h3>
+                    <p style="margin-bottom: 1rem;">Documentation complète pour l'installation et configuration de pfSense.</p>
+                    <a href="Pfsense Configuration Guide.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+                <div class="procedure-block">
+                    <h3>Procédure Exchange</h3>
+                    <p style="margin-bottom: 1rem;">Configuration et gestion de Microsoft Exchange Server.</p>
+                    <a href="procedure exchange.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+                <div class="procedure-block">
+                    <h3>Procédure GLPI</h3>
+                    <p style="margin-bottom: 1rem;">Mise en place et gestion de GLPI pour la gestion d'actifs IT.</p>
+                    <a href="Procedure glpi.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+                <div class="procedure-block">
+                    <h3>Procédure Zabbix</h3>
+                    <p style="margin-bottom: 1rem;">Configuration du monitoring et supervision avec Zabbix.</p>
+                    <a href="procedure zabbix.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+                <div class="procedure-block">
+                    <h3>Procédure GPO et Lecteur Partagée</h3>
+                    <p style="margin-bottom: 1rem;">Gestion des stratégies de groupe et partage de ressources réseau.</p>
+                    <a href="gpo-lecteur.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+                <div class="procedure-block">
+                    <h3>Procédure Zyxel et Netgear</h3>
+                    <p style="margin-bottom: 1rem;">Configuration et gestion des équipements réseau Zyxel et Netgear.</p>
+                    <a href="procedure zyxel et netgear.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>CONTACT</h2>
+            <form style="display: flex; flex-direction: column; width: 100%; max-width: 400px;">
+                <input type="text" placeholder="NOM" required>
+                <input type="email" placeholder="EMAIL" required>
+                <textarea placeholder="MESSAGE" required></textarea>
+                <button type="submit">ENVOYER</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Particle background animation
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 150;
+        const digits = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+
+        class MatrixCharacter {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.speed = Math.random() * 3 + 2;
+                this.char = digits[Math.floor(Math.random() * digits.length)];
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.size = Math.random() * 10 + 14;
+            }
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                    this.char = digits[Math.floor(Math.random() * digits.length)];
+                }
+                this.opacity = Math.random() * 0.7 + 0.2;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 255, 0, ${this.opacity})`;
+                ctx.font = `${this.size}px 'Courier New'`;
+                ctx.fillText(this.char, this.x, this.y);
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new MatrixCharacter());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+    </script>
+</body>
+</html>
