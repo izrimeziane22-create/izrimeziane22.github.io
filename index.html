@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Portfolio</title>
+    <title>Portfolio - Izri Meziane</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..150,400;9..150,500;9..150,600;9..150,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         /* Reset and base styles */
         * {
@@ -12,60 +15,156 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Courier New', monospace;
+            font-family: 'DM Sans', sans-serif;
             line-height: 1.6;
-            color: #00FF00;
-            background-color: #000000;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 0, 0.03) 0px,
-                    rgba(0, 255, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
+            color: #1A1A2E;
+            background-color: #F8F9FA;
             overflow-x: hidden;
-            text-shadow: 0 0 10px #00FF00;
         }
-        /* Background canvas for particles */
-        #background-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Hero styles */
+        #home {
+            background: linear-gradient(180deg, #F0F4FF 0%, #FFFFFF 100%);
+            color: #1A1A2E;
+            padding: 100px 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-inner {
+            max-width: 1100px;
             width: 100%;
-            height: 100%;
-            z-index: -3;
+            text-align: center;
         }
+        .hero-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563EB, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'DM Serif Display', serif;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .available-badge {
+            display: inline-block;
+            background: #D1FAE5;
+            color: #065F46;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+        }
+        .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10B981;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .hero-name {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Display', serif;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #1A1A2E 60%, #2563EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 20px;
+            color: #6B7280;
+            font-weight: 400;
+            display: inline-block;
+            border-left: 4px solid #2563EB;
+            padding-left: 12px;
+            margin-bottom: 1rem;
+        }
+        .hero-tagline {
+            font-size: 1.3em;
+            color: #1A1A2E;
+            margin: 0.5rem auto 0.5rem auto;
+            max-width: 700px;
+        }
+        .hero-desc {
+            font-size: 1.1em;
+            margin: 2rem auto;
+            max-width: 700px;
+            line-height: 1.8;
+            color: #6B7280;
+        }
+        .hero-ctas { display:flex; gap:1rem; justify-content:center; margin:2rem 0; flex-wrap:wrap; }
+        .btn { padding: 0.8rem 2rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-block; cursor: pointer; transition: all 0.25s; }
+        .btn-primary { background-color: #2563EB; color: #FFFFFF; border: none; }
+        .btn-primary:hover { background-color: #1d4ed8; }
+        .btn-outline { background: transparent; color: #2563EB; border: 2px solid #2563EB; }
+        .btn-outline:hover { background: #2563EB; color: #FFFFFF; }
         /* Header */
         header {
-            background-color: #000000;
-            color: #00FF00;
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
+            background-color: #FFFFFF;
+            padding: 0.75rem 1rem;
+            position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid #00FF00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            width: 100%;
+            border-bottom: 1px solid #E5E7EB;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
-        nav ul {
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .logo a {
+            font-weight: 700;
+            color: #1A1A2E;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-links {
             list-style: none;
             display: flex;
-            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
         }
-        nav ul li {
-            margin: 0 1rem;
-        }
-        nav ul li a {
-            color: #00FF00;
+        .nav-links li { margin: 0; }
+        .nav-links li a {
+            font-size: 14px;
+            color: #374151;
+            font-weight: 500;
             text-decoration: none;
-            transition: all 0.3s;
-            text-shadow: 0 0 10px #00FF00;
+            padding: 6px 4px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            display: inline-block;
         }
-        nav ul li a:hover {
-            color: #00FFFF;
-            text-shadow: 0 0 20px #00FFFF;
-            transform: scale(1.1);
+        .nav-links li a:hover {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+        .nav-links li a.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
         }
         /* Dropdown menu */
         nav .dropdown {
@@ -79,15 +178,15 @@
             top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #000000;
-            border: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
             border-top: none;
             min-width: 180px;
             list-style: none;
             display: none;
             z-index: 101;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-            margin-top: -2px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-top: -1px;
             padding: 0.5rem 0;
         }
         nav .dropdown:hover .dropdown-menu {
@@ -101,192 +200,234 @@
         nav .dropdown-menu li a {
             display: block;
             padding: 0.8rem 1.5rem;
-            color: #00FF00;
+            color: #1A1A2E;
             text-decoration: none;
             transition: all 0.3s;
             white-space: nowrap;
         }
         nav .dropdown-menu li a:hover {
-            background-color: #00FF00;
-            color: #000000;
-            text-shadow: none;
-            transform: none;
+            background-color: #2563EB;
+            color: #FFFFFF;
         }
         /* Main sections */
         main {
             margin-top: 80px;
             display: block;
             width: 100%;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* About section styles */
+        #about {
+            background: #F8FAFC;
+        }
+        .about-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            color: #374151;
+            padding: 2rem 1rem;
+        }
+        .about-inner p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 1rem;
         }
         section {
-            min-height: 100vh;
-            padding: 2rem;
+            /* consistent section spacing */
+            padding: 80px 1rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 0, 0.03) 0px,
-                    rgba(0, 255, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
+            background-color: #FFFFFF;
             position: relative;
             z-index: 1;
             width: 100%;
+            border-bottom: 1px solid #E5E7EB;
         }
-        #home {
-            background: rgba(0, 0, 0, 0.7);
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 0, 0.03) 0px,
-                    rgba(0, 255, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
-            animation: matrixGlow 3s ease-in-out infinite;
-            color: #00FF00;
-        }
-        @keyframes matrixGlow {
-            0%, 100% { text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; }
-            50% { text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00, 0 0 60px #00FFFF; }
-        }
+        /* removed default #home placeholder above */
         #profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 3px solid #4169E1;
+            border: 2px solid #E5E7EB;
             margin-bottom: 1rem;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px #4169E1; }
-            100% { box-shadow: 0 0 20px #4169E1; }
-        }
-        @keyframes matrixBlink {
-            0%, 100% { box-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; }
-            50% { box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF; }
-        }
-        @keyframes galaxyMove {
-            0%, 100% { background-position: 0% 50%, auto, auto, auto; }
-            50% { background-position: 100% 50%, auto, auto, auto; }
         }
         #competences {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            border-top: 1px solid #E5E7EB;
         }
+
+        /* Education timeline */
+        .timeline {
+            position: relative;
+            padding-left: 48px;
+            margin-top: 1rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E5E7EB;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.75rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 18px;
+            top: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.02);
+        }
+        .dot-en { background: #2563EB; }
+        .dot-obt { background: #10B981; }
+        .dot-inv { background: #9CA3AF; }
+        .edu-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            margin-left: 12px;
+        }
+        .edu-card h4 { font-weight: 600; font-size: 15px; margin-bottom: 6px; color: #1A1A2E; }
+        .edu-period { font-size: 13px; color: #9CA3AF; margin-bottom: 8px; }
+        .status-badge { font-size: 13px; padding: 4px 8px; border-radius: 999px; display: inline-block; }
+        .status-en { background: #DBEAFE; color: #1D4ED8; }
+        .status-obt { background: #D1FAE5; color: #065F46; }
+        .status-inv { background: #F3F4F6; color: #6B7280; }
         #tcs {
-            background-color: rgba(0, 0, 0, 0.7);
-            border-left: 5px solid #00FF00;
-            color: #00FF00;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 2rem;
-            flex-wrap: wrap;
-            border-top: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            border-top: 1px solid #E5E7EB;
+            width: 100%;
+            display: block;
         }
         #stages {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            border-top: 1px solid #E5E7EB;
         }
         #veille {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            border-top: 1px solid #E5E7EB;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2rem;
         }
         #projects {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            border-top: 1px solid #E5E7EB;
         }
-        #contact {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
-            min-height: auto !important;
-            width: 100% !important;
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-            padding: 3rem 2rem;
-            clear: both;
-        }
-        #tcs {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #00FF00;
-            border-top: 2px solid #00FF00;
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 2rem;
-        }
+        /* contact styles previously overridden earlier; the final #contact styles are defined later */
         #tcs h2 {
             margin-bottom: 2rem;
         }
         .procedure-block {
-            background: #000000;
+            background: #FFFFFF;
             padding: 1.5rem;
-            border-radius: 0px;
-            border: 2px solid #00FF00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             transition: all 0.3s;
-            color: #00FF00;
+            color: #1A1A2E;
             max-width: 500px;
             text-align: center;
         }
+        /* Logo / glassmorphism for procedure cards */
+        .procedure-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.6);
+            padding: 8px;
+            display: inline-block;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 4px 14px rgba(16,24,40,0.06);
+            backdrop-filter: blur(6px) saturate(120%);
+        }
+        .procedure-block:hover .procedure-logo {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 10px 24px rgba(16,24,40,0.12);
+        }
+        /* subtle hover lift for cards */
+        .procedure-block:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(2,6,23,0.12);
+            border-color: rgba(37,99,235,0.12);
+        }
+        /* Smooth entrance for logos */
+        .procedure-logo.enter {
+            animation: fadeInUp 0.45s ease-out forwards;
+        }
         .procedure-block:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
-            border-color: #00FFFF;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            border-color: #2563EB;
         }
         .procedure-block h3 {
-            color: #00FFFF;
+            color: #2563EB;
             margin-bottom: 1rem;
-            text-shadow: 0 0 10px #00FFFF;
         }
         .procedure-link {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: #000000;
-            color: #00FF00;
-            border: 2px solid #00FF00;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
             text-decoration: none;
             margin-top: 1rem;
             transition: all 0.3s;
             cursor: pointer;
-            text-shadow: 0 0 10px #00FF00;
-            font-weight: bold;
+            font-weight: 600;
         }
         .procedure-link:hover {
-            background-color: #00FF00;
-            color: #000000;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            background-color: #1d4ed8;
         }
-        h1, h2 {
+        h1 {
             margin-bottom: 1rem;
-            color: #00FF00;
-            text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00;
-            font-weight: bold;
+            color: #1A1A2E;
+            font-weight: 700;
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+        }
+        /* Section headings (h2) — consistent styling */
+        section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1A1A2E;
+            border-left: 3px solid #2563EB;
+            padding-left: 16px;
+            margin-bottom: 1rem;
+            text-align: left;
+            max-width: 1100px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
         p {
             max-width: 600px;
             margin-bottom: 1rem;
+            color: #6B7280;
         }
         /* Projects grid */
         .projects-grid {
@@ -297,51 +438,83 @@
             max-width: 1200px;
         }
         .project {
-            background: #000000;
-            padding: 1rem;
-            border-radius: 0px;
-            border: 2px solid #00FF00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-            transition: all 0.3s;
-            color: #00FF00;
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            color: #1A1A2E;
         }
         #tcs .project {
             max-width: 400px;
-            padding: 0.5rem;
+            padding: 24px;
         }
         .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
-            border-color: #00FFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            border-color: #2563EB;
+        }
+        .project h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A2E;
+            margin-bottom: 0.75rem;
+        }
+        .project p, .project ul, .project ol {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.6;
+        }
+        .tech-tag {
+            display: inline-block;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-right: 6px;
+            margin-top: 6px;
+        }
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #F3F4F6;
+            color: #374151;
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
         }
         .veille {
-            background: #000000;
+            background: #FFFFFF;
             padding: 1rem;
-            border-radius: 0px;
-            border: 2px solid #00FF00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             transition: all 0.3s;
-            color: #00FF00;
+            color: #1A1A2E;
             width: 100%;
             max-width: 400px;
             text-align: center;
         }
         .veille:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
-            border-color: #00FFFF;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            border-color: #2563EB;
         }
         .veille h3 {
-            color: #00FFFF;
+            color: #2563EB;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px #00FFFF;
         }
         .veille p {
             margin: 5px 0;
             line-height: 1.5;
+            color: #6B7280;
         }
         .veille strong {
-            color: #ffffff;
+            color: #1A1A2E;
         }
         /* Contact form */
         form {
@@ -353,61 +526,257 @@
         input, textarea {
             margin-bottom: 1rem;
             padding: 0.5rem;
-            border: 2px solid #00FF00;
-            border-radius: 0px;
-            background-color: #000000;
-            color: #00FF00;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px #00FF00;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            color: #1A1A2E;
+            font-family: 'DM Sans', sans-serif;
         }
         input::placeholder, textarea::placeholder {
-            color: #00AA00;
+            color: #9CA3AF;
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #00FFFF;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         button {
             padding: 0.5rem 1rem;
-            background-color: #000000;
-            color: #00FF00;
-            border: 2px solid #00FF00;
-            border-radius: 0px;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px #00FF00;
-            font-weight: bold;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
         }
         button:hover {
-            background-color: #00FF00;
-            color: #000000;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
-            border-color: #00FFFF;
+            background-color: #1d4ed8;
+        }
+        /* Scroll-triggered fade-in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        section, .project, .procedure-block, .veille, .edu-card, .timeline-item {
+            opacity: 0;
+        }
+        section.visible, .project.visible, .procedure-block.visible, .veille.visible, .edu-card.visible, .timeline-item.visible {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
         /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
+            .nav-links {
                 flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
             }
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-            section {
-                padding: 1rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-links li { margin: 0.25rem 0; }
+            /* Keep consistent section padding on mobile as requested */
+            section { padding: 80px 1rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .projects-grid .project { width: 100%; }
+            .procedure-block { width: 100%; }
+            .timeline { padding-left: 34px; }
+            .timeline::before { left: 16px; }
+            .timeline-dot { left: 16px; }
+        }
+
+        /* Contact section styles */
+        #contact {
+            background: #1A1A2E;
+            color: #FFFFFF;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+        #contact h2 {
+            color: #FFFFFF;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .contact-sub {
+            color: #9CA3AF;
+            font-size: 16px;
+            margin-bottom: 1.25rem;
+        }
+        .contact-cta {
+            display: inline-block;
+            background: #FFFFFF;
+            color: #1A1A2E;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        .contact-cta:hover { background: #F3F4F6; }
+        /* Contact form inside dark section */
+        #contact form { margin: 1.5rem auto 0; max-width: 520px; display: flex; flex-direction: column; gap: 0.75rem; }
+        #contact input, #contact textarea {
+            padding: 10px 12px; border-radius: 8px; border: 1px solid #E5E7EB; background: #FFFFFF; color: #1A1A2E;
+        }
+        #contact button[type="submit"] { background: #FFFFFF; color: #1A1A2E; padding: 12px 28px; border-radius: 8px; font-weight:600; border: none; cursor: pointer; }
+        #contact button[type="submit"]:hover { background: #F3F4F6; }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: #6B7280;
+            font-size: 13px;
+            text-align: center;
+            padding: 16px 1rem;
+        }
+        /* Success message styling */
+        .success-message {
+            color: #10B981;
+            font-size: 14px;
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 0.5rem;
+        }
+        .stat-item p {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        /* Skill bars */
+        .skill-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        .skill-bar {
+            margin-bottom: 1.5rem;
+        }
+        .skill-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1A1A2E;
+        }
+        .skill-bar-progress {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2563EB, #1d4ed8);
+            border-radius: 999px;
+            transition: width 0.8s ease;
+        }
+
+        /* Project cards with label */
+        .project-label {
+            display: inline-block;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: 0.75rem;
+        }
+        .project ul, .project ol {
+            text-align: left;
+            color: #6B7280;
+        }
+        .project ul li::before {
+            content: '→ ';
+            color: #2563EB;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        /* Veille Grid */
+        .veille-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .veille-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+        }
+        .veille-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            border-color: #2563EB;
+        }
+        .veille-type {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #92400E;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+        .veille-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A2E;
+            margin-bottom: 0.75rem;
+        }
+        .veille-card p {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .veille-meta {
+            font-size: 12px;
+            color: #9CA3AF;
+            border-top: 1px solid #E5E7EB;
+            padding-top: 0.75rem;
         }
     </style>
 </head>
 <body>
-    <canvas id="background-canvas"></canvas>
+    <!-- removed animated background canvas -->
     <header>
-        <nav>
-            <ul>
+        <nav class="nav-container">
+            <div class="logo"><a href="#home">IZRI MEZIANE</a></div>
+            <ul class="nav-links">
                 <li><a href="#home">ACCUEIL</a></li>
                 <li><a href="#about">A PROPOS</a></li>
                 <li><a href="#competences">Badges</a></li>
@@ -427,281 +796,419 @@
     </header>
     <main>
         <section id="home">
-            <div style="max-width: 1000px; width: 100%; text-align: center;">
-                <h1 style="font-size: 3.5em; text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00; margin-bottom: 0.5rem; animation: matrixGlow 2s infinite;">IZRI MEZIANE</h1>
-                <h2 style="font-size: 2em; color: #00FFFF; text-shadow: 0 0 15px #00FFFF; margin-bottom: 1rem;">Étudiant en BTS SIO SISR</h2>
-                <p style="font-size: 1.3em; color: #00FF00; margin: auto auto 0.5rem auto; max-width: 700px; text-align: center;">solution d'infrastructure système et réseau</p>
-                
-                <p style="font-size: 1.1em; margin: 2rem auto; max-width: 700px; line-height: 1.8; text-align: center;">
-                    Passionné par l'infrastructure IT et les nouvelles technologies, je développe des compétences en administration système, sécurité réseau et virtualisation.
-                </p>
+            <div class="hero-inner">
+                <div class="available-badge"><span class="pulse-dot"></span>Alternant chez Orange • Dès août 2026</div>
+                <div class="hero-avatar">IM</div>
+                <h1 class="hero-name">IZRI MEZIANE</h1>
+                <h2 class="hero-subtitle">Étudiant en BTS SIO SISR</h2>
+                <p class="hero-tagline">solution d'infrastructure système et réseau</p>
 
-                <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
-                    <a href="#projects-scolaire" style="padding: 0.8rem 2rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FF00;" onmouseover="this.style.background='#00FF00'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 0, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FF00'; this.style.boxShadow='none'">Voir mes projets</a>
-                    <a href="#contact" style="padding: 0.8rem 2rem; background-color: #000000; color: #00FFFF; border: 2px solid #00FFFF; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FFFF;" onmouseover="this.style.background='#00FFFF'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FFFF'; this.style.boxShadow='none'">Me contacter</a>
+                <p class="hero-desc">Passionné par l'infrastructure IT et les nouvelles technologies, je développe des compétences en administration système, sécurité réseau et virtualisation.</p>
+
+                <div class="hero-ctas">
+                    <a href="#projects-scolaire" class="btn btn-primary">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-outline">Me contacter</a>
                 </div>
 
-                <div style="margin-top: 3rem; padding: 2rem; border: 2px solid #00FF00; background: rgba(0, 255, 0, 0.05);">
-                    <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-bottom: 1.5rem;">» Stack Technologique</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left;">
-                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
-                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Réseaux</h4>
-                            <p style="font-size: 0.95em;">Cisco CCNA <span style="color: #00FFFF;">(en cours)</span> • VLANs</p>
+                <div style="margin-top: 3rem; padding: 2rem; border: 1px solid #E5E7EB; background: #F8F9FA; border-radius: 8px;">
+                    <h3 style="color: #2563EB; margin-bottom: 2rem;">» Stack Technologique</h3>
+                    <div class="skill-container">
+                        <div class="skill-bar">
+                            <div class="skill-bar-label">
+                                <span>🖧 Réseaux</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar-progress">
+                                <div class="skill-bar-fill" style="width: 75%;"></div>
+                            </div>
+                            <p style="font-size: 0.85em; color: #6B7280; margin-top: 4px;">Cisco CCNA • VLANs • Configuration switches</p>
                         </div>
-                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
-                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Sécurité</h4>
-                            <p style="font-size: 0.95em;">pfSense <span style="color: #00FFFF;">(en cours)</span> • Firewall</p>
+
+                        <div class="skill-bar">
+                            <div class="skill-bar-label">
+                                <span>🔒 Sécurité</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar-progress">
+                                <div class="skill-bar-fill" style="width: 70%;"></div>
+                            </div>
+                            <p style="font-size: 0.85em; color: #6B7280; margin-top: 4px;">pfSense • Firewall • Règles de sécurité</p>
                         </div>
-                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
-                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Systèmes</h4>
-                            <p style="font-size: 0.95em;">Active Directory <span style="color: #00FFFF;">(en cours)</span> • Linux/Windows <span style="color: #00FFFF;">(en cours)</span></p>
+
+                        <div class="skill-bar">
+                            <div class="skill-bar-label">
+                                <span>🖥️ Systèmes</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="skill-bar-progress">
+                                <div class="skill-bar-fill" style="width: 65%;"></div>
+                            </div>
+                            <p style="font-size: 0.85em; color: #6B7280; margin-top: 4px;">Active Directory • Linux/Windows • Administration</p>
                         </div>
-                        <div style="border-left: 3px solid #00FF00; padding-left: 1rem;">
-                            <h4 style="color: #00FFFF; margin-bottom: 0.5rem;">Virtualisation</h4>
-                            <p style="font-size: 0.95em;">Proxmox <span style="color: #00FFFF;">(en cours)</span> • Hyper-V</p>
+
+                        <div class="skill-bar">
+                            <div class="skill-bar-label">
+                                <span>☁️ Virtualisation</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="skill-bar-progress">
+                                <div class="skill-bar-fill" style="width: 60%;"></div>
+                            </div>
+                            <p style="font-size: 0.85em; color: #6B7280; margin-top: 4px;">Proxmox • Hyper-V • Environnements VM</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <h3>6+</h3>
+                <p>Procédures</p>
+            </div>
+            <div class="stat-item">
+                <h3>2</h3>
+                <p>Projets</p>
+            </div>
+            <div class="stat-item">
+                <h3>Marseille</h3>
+                <p>PACA</p>
+            </div>
+            <div class="stat-item">
+                <h3>Open</h3>
+                <p>Alternance</p>
+            </div>
+        </div>
+
         <section id="about">
             <h2>A PROPOS</h2>
-            <div style="max-width: 900px; text-align: left; color: #00FF00;">
-                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-top: 2rem; margin-bottom: 1rem;">» MA PRÉSENTATION</h3>
-                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+            <div class="about-inner">
+                <h3 style="color: #2563EB; margin-top: 0.5rem; margin-bottom: 1rem;">» MA PRÉSENTATION</h3>
+                <p>
                     Initialement attiré par le domaine de la finance et de la gestion, j'ai débuté mon parcours en licence Économie-Gestion. Cette formation m'a permis d'acquérir une solide base analytique et un esprit rigoureux. Cependant, ma curiosité constante pour l'univers de l'informatique et des technologies m'a progressivement amené à réfléchir à une réorientation vers un domaine plus technique.
                 </p>
-                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                <p>
                     Depuis toujours intéressé par le fonctionnement des systèmes, des réseaux et des infrastructures numériques, j'ai choisi de m'orienter vers le BTS SIO option SISR afin de me spécialiser dans un secteur qui me passionne réellement. Cette décision a été mûrement réfléchie et correspond pleinement à mes ambitions professionnelles.
                 </p>
-                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                <p>
                     Curieux, méthodique et doté d'un esprit d'analyse développé grâce à mon parcours en économie, j'apprécie résoudre des problématiques techniques et comprendre en profondeur le fonctionnement des environnements informatiques. Mon sens de l'adaptation et mon aisance relationnelle me permettent de travailler efficacement en équipe et de m'investir pleinement dans les projets qui me sont confiés.
                 </p>
-                <p style="margin-bottom: 2rem; line-height: 1.8;">
+                <p>
                     Actuellement en BTS SIO option SISR, je développe mes compétences en administration système, gestion des réseaux, sécurité informatique et virtualisation. Je suis à la recherche d'une alternance afin de mettre en pratique mes connaissances et continuer à progresser dans un environnement professionnel stimulant.
                 </p>
 
-                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF; margin-top: 2rem; margin-bottom: 1rem;">» MON PARCOURS SCOLAIRE</h3>
-                
-                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00; margin-bottom: 1rem;">
-                        <h4 style="color: #00FFFF;">BTS SIO Option SISR – 1ère année</h4>
-                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> En cours</p>
-                        <p style="margin: 0.5rem 0;"><strong>École :</strong> IFC Marseille</p>
-                        <p style="margin: 0.5rem 0;"><strong>Spécialité :</strong> Solutions d'Infrastructure, Systèmes et Réseaux</p>
-                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2026 - Juin 2027</p>
-                    </div>
-                </div>
+                <h3 style="color: #2563EB; margin-top: 1.5rem; margin-bottom: 1rem;">» MON PARCOURS SCOLAIRE</h3>
 
-                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem; margin-bottom: 1.5rem;">
-                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00; margin-bottom: 1rem;">
-                        <h4 style="color: #00FFFF;">Licence 1 & 2 : Économie – Gestion</h4>
-                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> Invalide</p>
-                        <p style="margin: 0.5rem 0;"><strong>Université :</strong> Aix-Marseille Université</p>
-                        <p style="margin: 0.5rem 0;"><strong>Description :</strong> Formation en économie, gestion, mathématiques appliquées, statistiques et analyse financière</p>
-                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2023 - Juin 2025</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-dot dot-en" aria-hidden></span>
+                        <div class="edu-card">
+                            <h4>BTS SIO Option SISR – 1ère année</h4>
+                            <p class="edu-period">Septembre 2026 - Juin 2027</p>
+                            <p><strong>École :</strong> IFC Marseille</p>
+                            <p><strong>Spécialité :</strong> Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                            <div style="margin-top:8px;"><span class="status-badge status-en">En cours</span></div>
+                        </div>
                     </div>
-                </div>
 
-                <div style="border-left: 3px solid #00FF00; padding-left: 1.5rem;">
-                    <div style="background: rgba(0, 255, 0, 0.1); padding: 1rem; border: 1px solid #00AA00;">
-                        <h4 style="color: #00FFFF;">Baccalauréat Général – Spécialités Mathématiques & Sciences Économiques et Sociales</h4>
-                        <p style="margin: 0.5rem 0;"><strong>Status :</strong> Obtenu</p>
-                        <p style="margin: 0.5rem 0;"><strong>Établissement :</strong> Lycée Saint-Charles</p>
-                        <p style="margin: 0.5rem 0;"><strong>Description :</strong> Formation générale avec spécialisation en mathématiques</p>
-                        <p style="margin: 0.5rem 0;"><strong>Période :</strong> Septembre 2021 - Juin 2022</p>
+                    <div class="timeline-item">
+                        <span class="timeline-dot dot-inv" aria-hidden></span>
+                        <div class="edu-card">
+                            <h4>Licence 1 & 2 : Économie – Gestion</h4>
+                            <p class="edu-period">Septembre 2023 - Juin 2025</p>
+                            <p><strong>Université :</strong> Aix-Marseille Université</p>
+                            <p><strong>Description :</strong> Formation en économie, gestion, mathématiques appliquées, statistiques et analyse financière</p>
+                            <div style="margin-top:8px;"><span class="status-badge status-inv">Invalide</span></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-dot dot-obt" aria-hidden></span>
+                        <div class="edu-card">
+                            <h4>Baccalauréat Général – Spécialités Mathématiques & Sciences Économiques et Sociales</h4>
+                            <p class="edu-period">Septembre 2021 - Juin 2022</p>
+                            <p><strong>Établissement :</strong> Lycée Saint-Charles</p>
+                            <p><strong>Description :</strong> Formation générale avec spécialisation en mathématiques</p>
+                            <div style="margin-top:8px;"><span class="status-badge status-obt">Obtenu</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <section id="competences">
             <h2>Badges</h2>
-            <a href="https://www.credly.com/users/meziane-izri/badges#credly" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; border-radius: 0px; cursor: pointer; transition: all 0.3s; text-decoration: none; text-shadow: 0 0 10px #00FF00;">VOIR MES BADGES CREDLY</a>
+            <a href="https://www.credly.com/users/meziane-izri/badges#credly" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background-color: #2563EB; color: #FFFFFF; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s; text-decoration: none; font-weight: 600;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">VOIR MES BADGES CREDLY</a>
         </section>
         <section id="tcs">
             <h2>TCS (SISR)</h2>
-            <div style="background-color: rgba(0, 0, 0, 0.7); border: 2px solid #00FF00; padding: 2rem; max-width: 900px; min-height: 300px; box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;">
-                <h3 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF;">📊 Fichier TCS</h3>
-                <a href="TCS.xlsx" download style="padding: 0.8rem 2rem; background-color: #000000; color: #00FF00; border: 2px solid #00FF00; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px #00FF00; border-radius: 4px;" onmouseover="this.style.background='#00FF00'; this.style.color='#000000'; this.style.boxShadow='0 0 30px rgba(0, 255, 0, 0.8)'" onmouseout="this.style.background='#000000'; this.style.color='#00FF00'; this.style.boxShadow='none'">TÉLÉCHARGER TCS.xlsx</a>
+            <div style="background-color: #FFFFFF; border: 1px solid #E5E7EB; padding: 2rem; max-width: 900px; min-height: 300px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; border-radius: 8px;">
+                <h3 style="color: #2563EB;">� Fichier TCS</h3>
+                <a href="TCS Izri.pdf" download style="padding: 0.8rem 2rem; background-color: #2563EB; color: #FFFFFF; border: none; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s; border-radius: 6px;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">TÉLÉCHARGER TCS.pdf</a>
             </div>
         </section>
         <section id="projects-scolaire">
             <h2>Projet scolaire E6</h2>
-            <div class="project">
-                <h3>Projet 1 : configuration du routeur et création de VLAN</h3>
+            <div class="projects-grid">
+                <div class="project">
+                    <span class="project-label">Projet 01</span>
+                    <h3>Configuration du routeur et création de VLAN</h3>
                 <p><strong>Objectif :</strong> Séparer le réseau en plusieurs sous-réseaux pour améliorer la sécurité et la gestion du trafic.</p>
                 <p><strong>Actions réalisées :</strong></p>
-                <ul>
+                <ul style="color: #6B7280;">
                     <li>Analyse du réseau existant et planification des VLANs (VLAN 10 : administration, VLAN 20 : utilisateurs, VLAN 30 : invités)</li>
                     <li>Configuration des VLANs sur switchs Zyxel GS1900 et Netgear GS108E</li>
                     <li>Attribution des ports aux VLANs correspondants</li>
                     <li>Test de communication entre VLANs</li>
                 </ul>
-                <p><strong>Outils et technologies utilisés :</strong> Zyxel GS1900, Netgear GS108E, plan d'adressage IP</p>
+                <p><strong>Outils et technologies utilisés :</strong>
+                    <span class="tech-tag">Zyxel GS1900</span>
+                    <span class="tech-tag">Netgear GS108E</span>
+                    <span class="tech-tag">Plan d'adressage IP</span>
+                </p>
                 <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
-                <ul>
+                <ul style="color: #6B7280;">
                     <li>Gérer le patrimoine informatique (SISR)</li>
                     <li>Administrer un réseau local</li>
                     <li>Mettre en œuvre des solutions de sécurité réseau</li>
                 </ul>
-            </div>
-            <div class="project">
-                <h3>Projet 2 : Virtualisation avec Proxmox et pfSense</h3>
+                </div>
+                <div class="project">
+                    <span class="project-label">Projet 02</span>
+                    <h3>Virtualisation avec Proxmox et pfSense</h3>
                 <p><strong>Objectif :</strong> Créer un environnement virtualisé sécurisé pour tester plusieurs machines et gérer le trafic réseau avec un firewall.</p>
                 <p><strong>Actions réalisées :</strong></p>
-                <ul>
+                <ul style="color: #6B7280;">
                     <li>Installation et configuration de Proxmox VE</li>
                     <li>Création de plusieurs machines virtuelles (VM)</li>
                     <li>Installation et configuration de pfSense pour filtrer le trafic entre VM et réseau externe</li>
                     <li>Création de règles de firewall et tests de connectivité</li>
                 </ul>
-                <p><strong>Outils et technologies utilisés :</strong> Proxmox VE, pfSense, VLAN, plan d'adressage IP</p>
+                <p><strong>Outils et technologies utilisés :</strong>
+                    <span class="tech-tag">Proxmox VE</span>
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">VLAN</span>
+                    <span class="tech-tag">Plan d'adressage IP</span>
+                </p>
                 <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
-                <ul>
+                <ul style="color: #6B7280;">
                     <li>Installer et configurer des systèmes et services réseaux (SISR)</li>
                     <li>Sécuriser un réseau et gérer les flux</li>
                     <li>Administrer un environnement virtualisé</li>
                 </ul>
+                </div>
             </div>
         </section>
         <section id="stages">
             <h2>MES STAGES</h2>
-            <p style="text-align: center; color: #00AA00; font-style: italic; margin: 2rem 0;">À venir...</p>
+            <p style="text-align: center; color: #9CA3AF; font-style: italic; margin: 2rem 0;">À venir...</p>
         </section>
         <section id="veille">
             <h2>VEILLE</h2>
-            <div class="veille">
-                <h3>Veille juridique – RGPD</h3>
-                <p><strong>Date :</strong> Janvier 2026</p>
-                <p><strong>Sources :</strong> CNIL, documentation officielle RGPD</p>
-                <p>Les données personnelles doivent être sécurisées et les violations signalées dans les délais légaux.</p>
-            </div>
-            <div class="veille">
-                <h3>Veille technologique – Solutions Cloud</h3>
-                <p><strong>Date :</strong> Janvier 2026</p>
-                <p><strong>Sources :</strong> Microsoft Azure, AWS</p>
-                <p>Solutions cloud pour stocker des données de manière sécurisée avec chiffrement et gestion des accès.</p>
+            <div class="veille-grid">
+                <div class="veille-card">
+                    <span class="veille-type">Juridique</span>
+                    <h3>RGPD et protection des données</h3>
+                    <p>Les données personnelles doivent être sécurisées et les violations signalées dans les délais légaux. Le RGPD impose des obligations strictes aux entreprises.</p>
+                    <div class="veille-meta">
+                        <strong>Sources :</strong> CNIL | <strong>Date :</strong> Janvier 2026
+                    </div>
+                </div>
+                <div class="veille-card">
+                    <span class="veille-type">Technologique</span>
+                    <h3>Solutions Cloud et infrastructure</h3>
+                    <p>Solutions cloud pour stocker des données de manière sécurisée avec chiffrement et gestion des accès avancés. Infrastructure as Code et DevOps.</p>
+                    <div class="veille-meta">
+                        <strong>Sources :</strong> Microsoft Azure, AWS | <strong>Date :</strong> Janvier 2026
+                    </div>
+                </div>
             </div>
         </section>
         <section id="procedure">
-            <h2>TOUTES LES PROCEDURES</h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-                <div class="procedure-block">
-                    <h3>Procédure pfSense + Rules</h3>
-                    <p style="margin-bottom: 1rem;">Documentation complète pour l'installation et configuration de pfSense.</p>
-                    <a href="Pfsense Configuration Guide.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
+            <h2>TOUTES LES PROCÉDURES</h2>
+
+            <div style="display:flex;gap:0;margin-bottom:2rem;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;width:fit-content;">
+                <button id="tab-install" onclick="switchTab('install')"
+                    style="padding:10px 28px;font-size:14px;font-weight:600;border:none;cursor:pointer;background:#fff;color:#6B7280;transition:all 0.2s;font-family:'DM Sans',sans-serif;">
+                    🔧 Installation
+                </button>
+                <button id="tab-usage" onclick="switchTab('usage')"
+                    style="padding:10px 28px;font-size:14px;font-weight:600;border:none;cursor:pointer;background:#2563EB;color:#fff;transition:all 0.2s;font-family:'DM Sans',sans-serif;">
+                    📖 Utilisation
+                </button>
+            </div>
+
+            <div id="panel-install" style="display:none;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;">
+                <div style="text-align:center;padding:3rem 2rem;">
+                    <div style="font-size:40px;margin-bottom:1rem;">🔧</div>
+                    <p style="font-size:16px;font-style:italic;color:#9CA3AF;max-width:400px;margin:0 auto;">Procédures d'installation à venir...</p>
                 </div>
-                <div class="procedure-block">
-                    <h3>Procédure Exchange</h3>
-                    <p style="margin-bottom: 1rem;">Configuration et gestion de Microsoft Exchange Server.</p>
-                    <a href="procedure%20Exchange.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
-                </div>
-                <div class="procedure-block">
-                    <h3>Procédure GLPI</h3>
-                    <p style="margin-bottom: 1rem;">Mise en place et gestion de GLPI pour la gestion d'actifs IT.</p>
-                    <a href="Procedure glpi.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
-                </div>
-                <div class="procedure-block">
-                    <h3>Procédure Zabbix</h3>
-                    <p style="margin-bottom: 1rem;">Configuration du monitoring et supervision avec Zabbix.</p>
-                    <a href="procedure zabbix.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
-                </div>
-                <div class="procedure-block">
-                    <h3>Procédure GPO et Lecteur Partagée</h3>
-                    <p style="margin-bottom: 1rem;">Gestion des stratégies de groupe et partage de ressources réseau.</p>
-                    <a href="gpo-lecteur.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
-                </div>
-                <div class="procedure-block">
-                    <h3>Procédure Zyxel et Netgear</h3>
-                    <p style="margin-bottom: 1rem;">Configuration et gestion des équipements réseau Zyxel et Netgear.</p>
-                    <a href="procedure zyxel et netgear.pdf" class="procedure-link" download>📄 Télécharger le PDF</a>
-                </div>
+            </div>
+
+            <div id="panel-usage" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;">
+                <div class="procedure-block"><h3>Procédure pfSense + Rules</h3><p style="margin-bottom:1rem;color:#6B7280;">Documentation complète pour l'installation et configuration de pfSense.</p><a href="Pfsense Configuration Guide.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Exchange</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion de Microsoft Exchange Server.</p><a href="procedure%20Exchange.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure GLPI</h3><p style="margin-bottom:1rem;color:#6B7280;">Mise en place et gestion de GLPI pour la gestion d'actifs IT.</p><a href="Procedure glpi.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Zabbix</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration du monitoring et supervision avec Zabbix.</p><a href="procedure zabbix.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure GPO et Lecteur Partagé</h3><p style="margin-bottom:1rem;color:#6B7280;">Gestion des stratégies de groupe et partage de ressources réseau.</p><a href="gpo-lecteur.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Zyxel et Netgear</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion des équipements réseau Zyxel et Netgear.</p><a href="procedure zyxel et netgear.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
             </div>
         </section>
         <section id="contact">
-            <h2>CONTACT</h2>
-            <form style="display: flex; flex-direction: column; width: 100%; max-width: 400px;">
-                <input type="text" placeholder="NOM" required>
-                <input type="email" placeholder="EMAIL" required>
-                <textarea placeholder="MESSAGE" required></textarea>
-                <button type="submit">ENVOYER</button>
-            </form>
+            <div class="contact-inner">
+                <h2>CONTACT</h2>
+                <p class="contact-sub">Disponible pour une alternance dans la région PACA.</p>
+
+                <a href="mailto:izrimeziane22@gmail.com" class="contact-cta">Envoyer un email</a>
+
+                <form>
+                    <input type="text" placeholder="NOM" required>
+                    <input type="email" placeholder="EMAIL" required>
+                    <textarea placeholder="MESSAGE" required rows="5"></textarea>
+                    <button type="submit">ENVOYER</button>
+                </form>
+            </div>
         </section>
+
+        <footer>
+            <div class="footer-inner">Made by Izri Meziane • 2026</div>
+        </footer>
     </main>
     <script>
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // set active class for nav links (if inside .nav-links)
+                if (this.closest('.nav-links')) {
+                    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll-triggered fade-in animation using Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.querySelectorAll('section, .project, .procedure-block, .veille, .edu-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form submission handler
+        const contactForm = document.querySelector('#contact form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Create success message
+                const successMsg = document.createElement('p');
+                successMsg.className = 'success-message';
+                successMsg.textContent = 'Message envoyé ! Je vous répondrai rapidement.';
+                
+                // Hide form and show success message
+                contactForm.style.display = 'none';
+                contactForm.parentElement.appendChild(successMsg);
+            });
+        }
+
+        function switchTab(tab) {
+            const install = document.getElementById('panel-install');
+            const usage = document.getElementById('panel-usage');
+            const btnInstall = document.getElementById('tab-install');
+            const btnUsage = document.getElementById('tab-usage');
+            if (tab === 'install') {
+                install.style.display = 'flex'; usage.style.display = 'none';
+                btnInstall.style.background = '#2563EB'; btnInstall.style.color = '#fff';
+                btnUsage.style.background = '#fff'; btnUsage.style.color = '#6B7280';
+            } else {
+                install.style.display = 'none'; usage.style.display = 'flex';
+                btnUsage.style.background = '#2563EB'; btnUsage.style.color = '#fff';
+                btnInstall.style.background = '#fff'; btnInstall.style.color = '#6B7280';
+            }
+        }
+
+        // Auto-insert procedure logos from img/ based on keywords in the title.
+        // Tries multiple filename variants and inserts only when the image successfully loads.
+        (function autoInsertProcedureLogos(){
+            const mapping = {
+                'pfsense': 'pfSense',
+                'exchange': 'Exchange',
+                'glpi': 'glpi',
+                'zabbix': 'zabbix',
+                'gpo': 'windows',
+                'windows': 'windows',
+                'zyxel': 'zyxel',
+                'netgear': 'netgear',
+                'xivo': 'xivo',
+                'photoshop': 'photoshop',
+                'figma': 'figma',
+                'illustrator': 'illustrator'
+            };
+
+            const tryLoad = (candidates, cb) => {
+                if (!candidates || candidates.length === 0) return cb(null);
+                const src = candidates.shift();
+                const tester = new Image();
+                tester.onload = () => cb(src);
+                tester.onerror = () => tryLoad(candidates, cb);
+                tester.src = src;
+            };
+
+            const blocks = document.querySelectorAll('#panel-usage .procedure-block');
+            blocks.forEach((block) => {
+                const titleEl = block.querySelector('h3');
+                if (!titleEl) return;
+                const text = titleEl.textContent.toLowerCase();
+
+                // find mapping key
+                let keyFound = null;
+                Object.keys(mapping).some(key => {
+                    if (text.includes(key)) { keyFound = key; return true; }
+                    return false;
+                });
+
+                if (!keyFound && text.includes('pf')) keyFound = 'pfsense';
+                if (!keyFound) return; // nothing to match — don't insert a broken image
+
+                const base = mapping[keyFound];
+                const candidates = [
+                    `img/${base}.svg`,
+                    `img/${base}.svg.svg`,
+                    `img/${base.toLowerCase()}.svg`,
+                    `img/${base.toLowerCase()}.svg.svg`,
+                    `img/${base.charAt(0).toUpperCase()+base.slice(1)}.svg`
+                ];
+
+                tryLoad(candidates, (goodSrc) => {
+                    if (!goodSrc) return; // no file found
+
+                    const img = document.createElement('img');
+                    img.className = 'procedure-logo';
+                    img.alt = titleEl.textContent + ' logo';
+                    img.src = goodSrc;
+
+                    requestAnimationFrame(() => img.classList.add('enter'));
+                    block.insertBefore(img, titleEl);
                 });
             });
-        });
-
-        // Particle background animation
-        const canvas = document.getElementById('background-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-        const particleCount = 150;
-        const digits = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-
-        class MatrixCharacter {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.speed = Math.random() * 3 + 2;
-                this.char = digits[Math.floor(Math.random() * digits.length)];
-                this.opacity = Math.random() * 0.5 + 0.3;
-                this.size = Math.random() * 10 + 14;
-            }
-            update() {
-                this.y += this.speed;
-                if (this.y > canvas.height) {
-                    this.y = -20;
-                    this.x = Math.random() * canvas.width;
-                    this.char = digits[Math.floor(Math.random() * digits.length)];
-                }
-                this.opacity = Math.random() * 0.7 + 0.2;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(0, 255, 0, ${this.opacity})`;
-                ctx.font = `${this.size}px 'Courier New'`;
-                ctx.fillText(this.char, this.x, this.y);
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new MatrixCharacter());
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
-
-        // Resize canvas on window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
+        })();
     </script>
 </body>
 </html>
