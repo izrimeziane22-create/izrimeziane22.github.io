@@ -378,6 +378,16 @@
         .procedure-logo.enter {
             animation: fadeInUp 0.45s ease-out forwards;
         }
+        .procedure-logo-fallback {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1D4ED8;
+            border: 1px solid #DBEAFE;
+            background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+        }
         .procedure-block:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
@@ -1037,12 +1047,7 @@
                 </button>
             </div>
 
-            <div id="panel-install" style="display:none;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;">
-                <div style="text-align:center;padding:3rem 2rem;">
-                    <div style="font-size:40px;margin-bottom:1rem;">🔧</div>
-                    <p style="font-size:16px;font-style:italic;color:#9CA3AF;max-width:400px;margin:0 auto;">Procédures d'installation à venir...</p>
-                </div>
-            </div>
+            <div id="panel-install" style="display:none;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;"></div>
 
             <div id="panel-usage" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;">
                 <div class="procedure-block"><h3>Procédure pfSense + Rules</h3><p style="margin-bottom:1rem;color:#6B7280;">Documentation complète pour l'installation et configuration de pfSense.</p><a href="Pfsense Configuration Guide.pdf" class="procedure-link" download>📄 Télécharger le PDF</a></div>
@@ -1143,14 +1148,136 @@
             }
         }
 
+        const defaultInstallDescription = "Documentation complète d'installation et configuration.";
+        const installPdfFallbackFiles = [
+            'AD2.pdf',
+            'IzriMezianeE6ProcedureArtica.pdf',
+            'IzriMezianeE6ProcedureCREATION ET PARAMETRAGE VM PROXMOX.pdf',
+            'IzriMezianeE6ProcedureExchange.pdf',
+            'IzriMezianeE6Procedureglpi.pdf',
+            'IzriMezianeE6Procedurezabbix.pdf',
+            'procedure AD1.1.pdf'
+        ];
+
+        function toDisplayTitleFromFilename(fileName) {
+            const acronymMap = {
+                ad: 'AD',
+                glpi: 'GLPI',
+                vm: 'VM',
+                rgpd: 'RGPD',
+                dns: 'DNS',
+                dhcp: 'DHCP',
+                vpn: 'VPN'
+            };
+
+            const withoutExt = fileName.replace(/\.pdf$/i, '');
+            const cleaned = withoutExt
+                .replace(/^IzriMezianeE6Procedure/i, '')
+                .replace(/^procedure\s*/i, '')
+                .replace(/[\-_]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const normalized = cleaned || 'Procedure';
+            const words = normalized.split(' ').filter(Boolean);
+            const formatted = words.map((word) => {
+                const lower = word.toLowerCase();
+                if (acronymMap[lower]) return acronymMap[lower];
+                if (/^[a-z]+\d+(\.\d+)?$/i.test(word)) return word.toUpperCase();
+                return lower.charAt(0).toUpperCase() + lower.slice(1);
+            }).join(' ');
+
+            return `Installation ${formatted}`;
+        }
+
+        function createProcedureBlock({ title, href, description }) {
+            const block = document.createElement('div');
+            block.className = 'procedure-block';
+            block.innerHTML = `
+                <h3>${title}</h3>
+                <p style="margin-bottom:1rem;color:#6B7280;">${description}</p>
+                <a href="${href}" class="procedure-link" download>📄 Télécharger le PDF</a>
+            `;
+            return block;
+        }
+
+        async function getInstallPdfFiles() {
+            try {
+                const res = await fetch('install/');
+                if (!res.ok) throw new Error('Directory listing unavailable');
+
+                const html = await res.text();
+                const parsed = new DOMParser().parseFromString(html, 'text/html');
+                const links = Array.from(parsed.querySelectorAll('a[href]'))
+                    .map(a => (a.getAttribute('href') || '').trim())
+                    .filter(Boolean);
+
+                const pdfFiles = Array.from(new Set(
+                    links
+                        .map((href) => {
+                            const noQuery = href.split('?')[0].split('#')[0];
+                            const filePart = noQuery.split('/').pop() || '';
+                            return decodeURIComponent(filePart);
+                        })
+                        .filter(name => /\.pdf$/i.test(name))
+                ));
+
+                if (pdfFiles.length > 0) {
+                    return pdfFiles.sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+                }
+            } catch (err) {
+                // Fallback for hosts that do not expose directory listing.
+            }
+
+            return [...installPdfFallbackFiles];
+        }
+
+        async function renderInstallProcedures() {
+            const panelInstall = document.getElementById('panel-install');
+            if (!panelInstall) return;
+
+            const files = await getInstallPdfFiles();
+            panelInstall.innerHTML = '';
+
+            if (files.length === 0) {
+                panelInstall.innerHTML = `
+                    <div style="text-align:center;padding:3rem 2rem;">
+                        <div style="font-size:40px;margin-bottom:1rem;">🔧</div>
+                        <p style="font-size:16px;font-style:italic;color:#9CA3AF;max-width:400px;margin:0 auto;">Aucun PDF d'installation trouvé.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            files.forEach((fileName) => {
+                const title = toDisplayTitleFromFilename(fileName);
+                const href = `install/${encodeURIComponent(fileName)}`;
+                const block = createProcedureBlock({
+                    title,
+                    href,
+                    description: defaultInstallDescription
+                });
+
+                panelInstall.appendChild(block);
+                observer.observe(block);
+            });
+
+            autoInsertProcedureLogos('#panel-install .procedure-block');
+        }
+
         // Auto-insert procedure logos from img/ based on keywords in the title.
         // Tries multiple filename variants and inserts only when the image successfully loads.
-        (function autoInsertProcedureLogos(){
+        function autoInsertProcedureLogos(selector){
             const mapping = {
+                'ad1': 'ad1',
+                'ad2': 'ad2',
                 'pfsense': 'pfSense',
                 'exchange': 'Exchange',
                 'glpi': 'glpi',
                 'zabbix': 'zabbix',
+                'proxmox': 'proxmox',
+                'artica': 'artica',
+                'ad': 'windows',
                 'gpo': 'windows',
                 'windows': 'windows',
                 'zyxel': 'zyxel',
@@ -1159,6 +1286,37 @@
                 'photoshop': 'photoshop',
                 'figma': 'figma',
                 'illustrator': 'illustrator'
+            };
+
+            const buildFallbackLogo = (titleText) => {
+                const fallback = document.createElement('div');
+                fallback.className = 'procedure-logo procedure-logo-fallback enter';
+                fallback.setAttribute('aria-hidden', 'true');
+
+                const label = titleText.toLowerCase();
+                if (label.includes('ad1')) {
+                    fallback.textContent = 'AD1';
+                    return fallback;
+                }
+                if (label.includes('ad2')) {
+                    fallback.textContent = 'AD2';
+                    return fallback;
+                }
+                if (label.includes('ad')) {
+                    fallback.textContent = 'AD';
+                    return fallback;
+                }
+                if (label.includes('proxmox')) {
+                    fallback.textContent = 'PX';
+                    return fallback;
+                }
+                if (label.includes('artica')) {
+                    fallback.textContent = 'AR';
+                    return fallback;
+                }
+
+                fallback.textContent = 'PDF';
+                return fallback;
             };
 
             const tryLoad = (candidates, cb) => {
@@ -1170,8 +1328,10 @@
                 tester.src = src;
             };
 
-            const blocks = document.querySelectorAll('#panel-usage .procedure-block');
+            const blocks = document.querySelectorAll(selector || '#procedure .procedure-block');
             blocks.forEach((block) => {
+                if (block.querySelector('.procedure-logo')) return;
+
                 const titleEl = block.querySelector('h3');
                 if (!titleEl) return;
                 const text = titleEl.textContent.toLowerCase();
@@ -1184,19 +1344,38 @@
                 });
 
                 if (!keyFound && text.includes('pf')) keyFound = 'pfsense';
-                if (!keyFound) return; // nothing to match — don't insert a broken image
+                if (!keyFound) {
+                    block.insertBefore(buildFallbackLogo(titleEl.textContent), titleEl);
+                    return;
+                }
 
                 const base = mapping[keyFound];
                 const candidates = [
                     `img/${base}.svg`,
                     `img/${base}.svg.svg`,
+                    `img/${base}.png`,
+                    `img/${base}.jpg`,
+                    `img/${base}.jpeg`,
+                    `img/${base}.webp`,
                     `img/${base.toLowerCase()}.svg`,
                     `img/${base.toLowerCase()}.svg.svg`,
-                    `img/${base.charAt(0).toUpperCase()+base.slice(1)}.svg`
+                    `img/${base.toLowerCase()}.png`,
+                    `img/${base.toLowerCase()}.jpg`,
+                    `img/${base.toLowerCase()}.jpeg`,
+                    `img/${base.toLowerCase()}.webp`,
+                    `img/${base.charAt(0).toUpperCase()+base.slice(1)}.svg`,
+                    `img/${base.toUpperCase()}.svg`,
+                    `img/${base.toUpperCase()}.png`,
+                    `img/${base.toUpperCase()}.jpg`,
+                    `img/${base.toUpperCase()}.jpeg`,
+                    `img/${base.toUpperCase()}.webp`
                 ];
 
                 tryLoad(candidates, (goodSrc) => {
-                    if (!goodSrc) return; // no file found
+                    if (!goodSrc) {
+                        block.insertBefore(buildFallbackLogo(titleEl.textContent), titleEl);
+                        return;
+                    }
 
                     const img = document.createElement('img');
                     img.className = 'procedure-logo';
@@ -1207,7 +1386,10 @@
                     block.insertBefore(img, titleEl);
                 });
             });
-        })();
+        }
+
+        autoInsertProcedureLogos('#panel-usage .procedure-block');
+        renderInstallProcedures();
     </script>
 </body>
 </html>
