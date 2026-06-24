@@ -961,56 +961,152 @@
             <div class="projects-grid">
                 <div class="project">
                     <span class="project-label">Projet 01</span>
-                    <h3>Configuration du routeur et création de VLAN</h3>
-                <p><strong>Objectif :</strong> Séparer le réseau en plusieurs sous-réseaux pour améliorer la sécurité et la gestion du trafic.</p>
+                    <h3>Sécurisation réseau pfSense</h3>
+                <p><strong>Contexte :</strong> Projet scolaire BTS SIO mené dans l'infrastructure fictive MMT créée avec mon binôme.</p>
                 <p><strong>Actions réalisées :</strong></p>
                 <ul style="color: #6B7280;">
-                    <li>Analyse du réseau existant et planification des VLANs (VLAN 10 : administration, VLAN 20 : utilisateurs, VLAN 30 : invités)</li>
-                    <li>Configuration des VLANs sur switchs Zyxel GS1900 et Netgear GS108E</li>
-                    <li>Attribution des ports aux VLANs correspondants</li>
-                    <li>Test de communication entre VLANs</li>
+                    <li>Création des segments VLAN Management 192.168.25.0/24 et VLAN Utilisateurs 192.168.35.0/24</li>
+                    <li>Configuration des alias pfSense et des règles de filtrage inter-VLAN selon le principe du moindre privilège</li>
+                    <li>Autorisation des flux Active Directory uniquement entre AD1 et AD2</li>
+                    <li>Blocage de l'accès administrateur depuis le VLAN utilisateurs</li>
+                    <li>Mise en place du NAT sortant automatique, puis validation par tests et consultation des journaux pare-feu</li>
                 </ul>
                 <p><strong>Outils et technologies utilisés :</strong>
-                    <span class="tech-tag">Zyxel GS1900</span>
-                    <span class="tech-tag">Netgear GS108E</span>
-                    <span class="tech-tag">Plan d'adressage IP</span>
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">Proxmox</span>
+                    <span class="tech-tag">NETGEAR GS308E</span>
+                    <span class="tech-tag">Active Directory</span>
                 </p>
                 <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
                 <ul style="color: #6B7280;">
-                    <li>Gérer le patrimoine informatique (SISR)</li>
-                    <li>Administrer un réseau local</li>
-                    <li>Mettre en œuvre des solutions de sécurité réseau</li>
+                    <li>Sécuriser un réseau et maîtriser les flux</li>
+                    <li>Administrer une infrastructure réseau virtualisée</li>
+                    <li>Appliquer une politique de filtrage adaptée aux besoins métiers</li>
                 </ul>
                 </div>
                 <div class="project">
                     <span class="project-label">Projet 02</span>
-                    <h3>Virtualisation avec Proxmox et pfSense</h3>
-                <p><strong>Objectif :</strong> Créer un environnement virtualisé sécurisé pour tester plusieurs machines et gérer le trafic réseau avec un firewall.</p>
+                    <h3>Supervision et gestion de parc Zabbix &amp; GLPI</h3>
+                <p><strong>Contexte :</strong> Même environnement scolaire MMT, avec une supervision et une gestion de parc pensées pour une exploitation réaliste.</p>
                 <p><strong>Actions réalisées :</strong></p>
                 <ul style="color: #6B7280;">
-                    <li>Installation et configuration de Proxmox VE</li>
-                    <li>Création de plusieurs machines virtuelles (VM)</li>
-                    <li>Installation et configuration de pfSense pour filtrer le trafic entre VM et réseau externe</li>
-                    <li>Création de règles de firewall et tests de connectivité</li>
+                    <li>Déploiement de Zabbix sur une VM Proxmox en 192.168.25.4</li>
+                    <li>Supervision d'AD1, AD2, pfSense et du switch via agent Zabbix et SNMP</li>
+                    <li>Configuration des alertes disque au-delà de 85 %, CPU élevé et perte de ping supérieure à 2 minutes</li>
+                    <li>Envoi des notifications mail via Exchange</li>
+                    <li>Déploiement de GLPI sur une VM Proxmox en 192.168.25.3 avec profils Admin, Technicien et Utilisateur</li>
+                    <li>Inventaire du parc et test complet du cycle de ticket, validé de bout en bout</li>
                 </ul>
                 <p><strong>Outils et technologies utilisés :</strong>
-                    <span class="tech-tag">Proxmox VE</span>
-                    <span class="tech-tag">pfSense</span>
-                    <span class="tech-tag">VLAN</span>
-                    <span class="tech-tag">Plan d'adressage IP</span>
+                    <span class="tech-tag">Zabbix 7.0.27</span>
+                    <span class="tech-tag">GLPI</span>
+                    <span class="tech-tag">Proxmox</span>
+                    <span class="tech-tag">Exchange</span>
                 </p>
                 <p><strong>Compétences BTS SIO mises en œuvre :</strong></p>
                 <ul style="color: #6B7280;">
-                    <li>Installer et configurer des systèmes et services réseaux (SISR)</li>
-                    <li>Sécuriser un réseau et gérer les flux</li>
-                    <li>Administrer un environnement virtualisé</li>
+                    <li>Superviser les services et anticiper les incidents</li>
+                    <li>Gérer le patrimoine informatique et l'inventaire du parc</li>
+                    <li>Mettre en place un suivi opérationnel avec gestion des tickets</li>
                 </ul>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <button type="button" class="procedure-link" onclick="window.open('IzriMezianeDossierE6.pdf', '_blank')">📄 Consulter le Dossier E6 complet</button>
+                <div style="text-align: center; margin-top: 0.65rem; font-size: 0.92rem; color: #9CA3AF; font-weight: 500;">
+                    🛠️ Dossier E6 en cours de finalisation
                 </div>
             </div>
         </section>
         <section id="stages">
             <h2>MES STAGES</h2>
-            <p style="text-align: center; color: #9CA3AF; font-style: italic; margin: 2rem 0;">À venir...</p>
+            <p style="max-width: 900px; margin: 0 auto 2rem auto; text-align: center; color: #6B7280; line-height: 1.7;">
+                Stage BTS SIO SISR réalisé chez Maîtrise Sécurité, entreprise spécialisée dans la sécurité des biens et des personnes, afin de participer à la maintenance informatique, au déploiement de postes et à la mise en service de solutions techniques.
+            </p>
+            <div class="projects-grid">
+                <div class="project">
+                    <span class="project-label">Contexte du stage</span>
+                    <h3>Présentation de l'entreprise</h3>
+                    <p>Maîtrise Sécurité a été créée le 01/10/2025. L'entreprise est spécialisée dans la sécurité des biens et des personnes, avec des prestations centrées sur l'installation d'alarmes, la vidéosurveillance, la télésurveillance et l'accompagnement des clients dans le diagnostic de sécurité.</p>
+                    <p>Ce stage m'a permis de découvrir le fonctionnement d'une entreprise de sécurité tout en intervenant sur des missions liées à la maintenance informatique et à la mise en service de postes de travail.</p>
+                    <p><strong>Environnement technique :</strong></p>
+                    <ul style="color: #6B7280;">
+                        <li>Système : installation et configuration de Windows sur poste client</li>
+                        <li>Matériel : composants internes, carte réseau, carte graphique, câble SATA</li>
+                        <li>Réseau : borne Wi-Fi, accès sans fil, contrôleur réseau sur serveur Proxmox</li>
+                    </ul>
+                </div>
+                <div class="project">
+                    <span class="project-label">Mission 1</span>
+                    <h3>Installation et remplacement de composants matériels</h3>
+                    <p>Cette mission consistait à intervenir sur un poste informatique pour assurer sa remise en état et sa compatibilité avec les besoins du service.</p>
+                    <ul style="color: #6B7280;">
+                        <li>Intégration d'un câble SATA au sein du poste informatique</li>
+                        <li>Installation et configuration d'une carte réseau</li>
+                        <li>Installation et mise en place d'une carte graphique</li>
+                    </ul>
+                    <p><strong>Compétences SISR mobilisées :</strong> <span class="tech-tag">C1</span> <span class="tech-tag">C2</span> <span class="tech-tag">C5</span></p>
+                    <p><strong>Apports professionnels :</strong> repérage des composants, respect des consignes d'installation, vérification du bon fonctionnement après intervention et compréhension du rôle de chaque élément dans la disponibilité du poste.</p>
+                </div>
+                <div class="project">
+                    <span class="project-label">Mission 2</span>
+                    <h3>Installation et configuration d'un poste informatique</h3>
+                    <p>Cette mission portait sur le déploiement complet d'un poste de travail et sa préparation à l'usage dans un environnement professionnel.</p>
+                    <ul style="color: #6B7280;">
+                        <li>Installation de Windows à partir d'une image ISO</li>
+                        <li>Configuration du système et mise en place d'un mot de passe administrateur</li>
+                        <li>Installation des mises à jour Windows</li>
+                        <li>Mise en place d'une borne Wi-Fi pour un poste client</li>
+                        <li>Configuration de l'accès au réseau sans fil</li>
+                        <li>Mise en place d'un contrôleur réseau sur un serveur Proxmox</li>
+                    </ul>
+                    <p><strong>Compétences SISR mobilisées :</strong> <span class="tech-tag">C1</span> <span class="tech-tag">C2</span> <span class="tech-tag">C4</span> <span class="tech-tag">C5</span> <span class="tech-tag">C6</span></p>
+                    <p><strong>Apports professionnels :</strong> autonomie dans l'installation d'un poste, prise en compte des exigences de sécurité, application des consignes de configuration et meilleure compréhension de la mise à disposition d'un service opérationnel.</p>
+                </div>
+                <div class="project">
+                    <span class="project-label">Référentiel SISR</span>
+                    <h3>Compétences mobilisées C1 à C6</h3>
+                    <p>Les missions réalisées pendant le stage ont principalement mobilisé les compétences du bloc SISR liées à la gestion du patrimoine, au support, à la mise à disposition de services et au développement professionnel.</p>
+                    <ul style="color: #6B7280;">
+                        <li><strong>C1 :</strong> gérer le patrimoine informatique par l'identification, l'installation et le suivi des éléments matériels et systèmes.</li>
+                        <li><strong>C2 :</strong> répondre aux incidents et aux demandes d'assistance en diagnostiquant les dysfonctionnements rencontrés.</li>
+                        <li><strong>C3 :</strong> communiquer et documenter les interventions pour faciliter la transmission des informations techniques.</li>
+                        <li><strong>C4 :</strong> travailler dans le respect des consignes, des priorités et de l'organisation donnée par le tuteur.</li>
+                        <li><strong>C5 :</strong> mettre à disposition un poste fonctionnel, sécurisé et adapté à l'utilisation professionnelle.</li>
+                        <li><strong>C6 :</strong> développer mes compétences par l'observation, l'analyse, l'autonomie et l'adaptation au contexte de l'entreprise.</li>
+                    </ul>
+                </div>
+                <div class="project">
+                    <span class="project-label">Outils et bilan</span>
+                    <h3>Outils utilisés et bilan professionnel</h3>
+                    <p><strong>Outils réseau, système et matériel :</strong></p>
+                    <p>
+                        <span class="tech-tag">Windows</span>
+                        <span class="tech-tag">Image ISO</span>
+                        <span class="tech-tag">Proxmox</span>
+                        <span class="tech-tag">Carte réseau</span>
+                        <span class="tech-tag">Carte graphique</span>
+                        <span class="tech-tag">Switch manageable</span>
+                    </p>
+                    <p><strong>Éléments liés à l'accès et à la sécurité :</strong></p>
+                    <p>
+                        <span class="tech-tag">Borne Wi-Fi</span>
+                        <span class="tech-tag">Accès sans fil</span>
+                        <span class="tech-tag">Mot de passe administrateur</span>
+                        <span class="tech-tag">Contrôleur réseau</span>
+                        <span class="tech-tag">Câble SATA</span>
+                    </p>
+                    <p><strong>Bilan professionnel :</strong> ce stage m'a permis de découvrir le fonctionnement d'une entreprise spécialisée dans les systèmes de sécurité, de consolider mes bases techniques et de progresser dans l'installation de postes, le remplacement de composants et la configuration système. J'ai également gagné en rigueur, en autonomie et en méthode dans le traitement des tâches confiées.</p>
+                    <ul style="color: #6B7280;">
+                        <li>Point fort : application des consignes techniques avec sérieux</li>
+                        <li>Point fort : progression sur le matériel, l'installation système et la mise en service</li>
+                        <li>À poursuivre : renforcer encore la maîtrise des environnements réseau et des outils d'administration</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="IZRIMEZIANEDossierE5.pdf" target="_blank" class="procedure-link">📄 Consulter le Dossier E5 complet</a>
+            </div>
         </section>
         <section id="veille">
             <h2>VEILLE</h2>
