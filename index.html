@@ -953,7 +953,7 @@
             <h2>TCS (SISR)</h2>
             <div style="background-color: #FFFFFF; border: 1px solid #E5E7EB; padding: 2rem; max-width: 900px; min-height: 300px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; border-radius: 8px;">
                 <h3 style="color: #2563EB;">� Fichier TCS</h3>
-                <a href="TCS Izri.pdf" download target="_blank" rel="noopener noreferrer" style="padding: 0.8rem 2rem; background-color: #2563EB; color: #FFFFFF; border: none; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s; border-radius: 6px;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">TÉLÉCHARGER TCS.pdf</a>
+                <a href="TCS Izri.pdf" target="_blank" rel="noopener noreferrer" style="padding: 0.8rem 2rem; background-color: #2563EB; color: #FFFFFF; border: none; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s; border-radius: 6px;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">TÉLÉCHARGER TCS.pdf</a>
             </div>
         </section>
         <section id="projects-scolaire">
@@ -1146,12 +1146,12 @@
             <div id="panel-install" style="display:none;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;"></div>
 
             <div id="panel-usage" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;width:100%;">
-                <div class="procedure-block"><h3>Procédure pfSense + Rules</h3><p style="margin-bottom:1rem;color:#6B7280;">Documentation complète pour l'installation et configuration de pfSense.</p><a href="Pfsense Configuration Guide.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
-                <div class="procedure-block"><h3>Procédure Exchange</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion de Microsoft Exchange Server.</p><a href="procedure%20Exchange.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
-                <div class="procedure-block"><h3>Procédure GLPI</h3><p style="margin-bottom:1rem;color:#6B7280;">Mise en place et gestion de GLPI pour la gestion d'actifs IT.</p><a href="Procedure glpi.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
-                <div class="procedure-block"><h3>Procédure Zabbix</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration du monitoring et supervision avec Zabbix.</p><a href="procedure zabbix.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
-                <div class="procedure-block"><h3>Procédure GPO et Lecteur Partagé</h3><p style="margin-bottom:1rem;color:#6B7280;">Gestion des stratégies de groupe et partage de ressources réseau.</p><a href="gpo-lecteur.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
-                <div class="procedure-block"><h3>Procédure Zyxel et Netgear</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion des équipements réseau Zyxel et Netgear.</p><a href="procedure zyxel et netgear.pdf" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure pfSense + Rules</h3><p style="margin-bottom:1rem;color:#6B7280;">Documentation complète pour l'installation et configuration de pfSense.</p><a href="Pfsense Configuration Guide.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Exchange</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion de Microsoft Exchange Server.</p><a href="procedure%20Exchange.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure GLPI</h3><p style="margin-bottom:1rem;color:#6B7280;">Mise en place et gestion de GLPI pour la gestion d'actifs IT.</p><a href="Procedure glpi.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Zabbix</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration du monitoring et supervision avec Zabbix.</p><a href="procedure zabbix.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure GPO et Lecteur Partagé</h3><p style="margin-bottom:1rem;color:#6B7280;">Gestion des stratégies de groupe et partage de ressources réseau.</p><a href="gpo-lecteur.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
+                <div class="procedure-block"><h3>Procédure Zyxel et Netgear</h3><p style="margin-bottom:1rem;color:#6B7280;">Configuration et gestion des équipements réseau Zyxel et Netgear.</p><a href="procedure zyxel et netgear.pdf" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a></div>
             </div>
         </section>
         <section id="contact">
@@ -1292,7 +1292,7 @@
             block.innerHTML = `
                 <h3>${title}</h3>
                 <p style="margin-bottom:1rem;color:#6B7280;">${description}</p>
-                <a href="${href}" class="procedure-link" download target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a>
+                <a href="${href}" class="procedure-link" target="_blank" rel="noopener noreferrer">📄 Télécharger le PDF</a>
             `;
             return block;
         }
